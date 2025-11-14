@@ -2,13 +2,17 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #ffffff;
 }
 
 .app-header {
   text-align: center;
-  color: white;
+  color: #1f2937;
   margin-bottom: 2rem;
   padding: 2.5rem 1rem 2rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
 }
 
 .app-header h1 {
@@ -17,6 +21,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: white;
 }
 
 .app-header p {
@@ -24,6 +29,7 @@
   opacity: 0.95;
   margin-bottom: 1.75rem;
   font-weight: 400;
+  color: white;
 }
 
 .mode-toggle {
@@ -54,7 +60,7 @@
 
 .mode-btn.active {
   background: white;
-  color: #667eea;
+  color: #3b82f6;
   border-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-weight: 600;
@@ -70,11 +76,12 @@
 
 .results-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   background: white;
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+  border: 1px solid #e5e7eb;
 }
 
 .image-preview {
@@ -82,14 +89,15 @@
   margin-bottom: 2rem;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  border: 2px solid #3b82f6;
 }
 
 .image-preview img {
   width: 100%;
   height: auto;
-  max-height: 400px;
-  object-fit: cover;
+  max-height: none;
+  object-fit: contain;
   display: block;
 }
 
@@ -100,7 +108,7 @@
 
 .spinner {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #667eea;
+  border-top: 4px solid #3b82f6;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -135,7 +143,7 @@
 }
 
 .btn-secondary {
-  background: #667eea;
+  background: #3b82f6;
   color: white;
   border: none;
   padding: 0.75rem 1.75rem;
@@ -147,15 +155,15 @@
 }
 
 .btn-secondary:hover {
-  background: #5a67d8;
+  background: #2563eb;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .app-footer {
   text-align: center;
   padding: 2rem 1rem;
-  color: white;
+  color: #6b7280;
   opacity: 0.8;
   font-size: 0.9rem;
 }

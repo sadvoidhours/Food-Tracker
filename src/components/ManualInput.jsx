@@ -4,12 +4,31 @@ import './ManualInput.css'
 function ManualInput({ onAnalyze, loading }) {
   const [ingredients, setIngredients] = useState('')
   const [dishName, setDishName] = useState('')
+  const [allergies, setAllergies] = useState('')
+  const [commonAllergies, setCommonAllergies] = useState([])
+
+  const commonAllergensList = [
+    'Peanuts', 'Tree Nuts', 'Milk', 'Eggs', 'Wheat', 'Soy', 
+    'Fish', 'Shellfish', 'Sesame', 'Gluten'
+  ]
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (ingredients.trim()) {
-      onAnalyze(ingredients, dishName)
+      const allergyList = [...commonAllergies]
+      if (allergies.trim()) {
+        allergyList.push(...allergies.split(',').map(a => a.trim()).filter(a => a))
+      }
+      onAnalyze(ingredients, dishName, allergyList)
     }
+  }
+
+  const toggleCommonAllergy = (allergen) => {
+    setCommonAllergies(prev => 
+      prev.includes(allergen) 
+        ? prev.filter(a => a !== allergen)
+        : [...prev, allergen]
+    )
   }
 
   return (
@@ -30,6 +49,33 @@ function ManualInput({ onAnalyze, loading }) {
               disabled={loading}
             />
             <span className="input-hint">Help AI understand your meal better</span>
+          </div>
+
+          <div className="form-group">
+            <label>Allergies & Dietary Restrictions (Optional)</label>
+            <div className="allergies-selector">
+              {commonAllergensList.map(allergen => (
+                <button
+                  key={allergen}
+                  type="button"
+                  className={`allergy-tag ${commonAllergies.includes(allergen) ? 'selected' : ''}`}
+                  onClick={() => toggleCommonAllergy(allergen)}
+                  disabled={loading}
+                >
+                  {allergen}
+                </button>
+              ))}
+            </div>
+            <input
+              type="text"
+              placeholder="Other allergies (comma-separated)"
+              value={allergies}
+              onChange={(e) => setAllergies(e.target.value)}
+              className="dish-input"
+              disabled={loading}
+              style={{ marginTop: '10px' }}
+            />
+            <span className="input-hint">We'll check for allergens and warn you</span>
           </div>
 
           <div className="form-group">

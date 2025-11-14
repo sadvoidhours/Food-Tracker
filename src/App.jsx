@@ -12,7 +12,7 @@ function App() {
   const [imagePreview, setImagePreview] = useState(null)
   const [inputMode, setInputMode] = useState('image') // 'image' or 'manual'
 
-  const handleImageUpload = async (file, dishName = '') => {
+  const handleImageUpload = async (file, dishName = '', allergyInfo = []) => {
     setLoading(true)
     setError(null)
     setResult(null)
@@ -25,7 +25,7 @@ function App() {
     reader.readAsDataURL(file)
 
     try {
-      const analysis = await analyzeFood(file, dishName)
+      const analysis = await analyzeFood(file, dishName, allergyInfo)
       setResult(analysis)
     } catch (err) {
       setError(err.message || 'Failed to analyze the image. Please try again.')
@@ -41,13 +41,13 @@ function App() {
     setImagePreview(null)
   }
 
-  const handleManualInput = async (ingredients, dishName = '') => {
+  const handleManualInput = async (ingredients, dishName = '', allergyInfo = []) => {
     setLoading(true)
     setError(null)
     setResult(null)
 
     try {
-      const analysis = await analyzeIngredients(ingredients, dishName)
+      const analysis = await analyzeIngredients(ingredients, dishName, allergyInfo)
       setResult(analysis)
     } catch (err) {
       setError(err.message || 'Failed to analyze ingredients. Please try again.')

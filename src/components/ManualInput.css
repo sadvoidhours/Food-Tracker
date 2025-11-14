@@ -8,7 +8,8 @@
   background: white;
   border-radius: 16px;
   padding: 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+  border: 1px solid #e5e7eb;
 }
 
 .manual-input-box h2 {
@@ -49,9 +50,9 @@
 
 .dish-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #3b82f6;
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .dish-input:disabled {
@@ -64,6 +65,41 @@
   color: #718096;
   font-size: 0.85rem;
   margin-top: 0.5rem;
+}
+
+.allergies-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.allergy-tag {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  background: white;
+  color: #4a5568;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.allergy-tag:hover:not(:disabled) {
+  border-color: #cbd5e0;
+  transform: translateY(-1px);
+}
+
+.allergy-tag.selected {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.allergy-tag:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .ingredients-textarea {
@@ -81,9 +117,9 @@
 
 .ingredients-textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #3b82f6;
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .ingredients-textarea:disabled {
@@ -97,7 +133,7 @@
 }
 
 .analyze-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -106,12 +142,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .analyze-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 .analyze-button:disabled {

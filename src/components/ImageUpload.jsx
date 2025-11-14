@@ -6,6 +6,13 @@ function ImageUpload({ onImageUpload, loading }) {
   const [dragActive, setDragActive] = useState(false)
   const [dishName, setDishName] = useState('')
   const [selectedFile, setSelectedFile] = useState(null)
+  const [allergies, setAllergies] = useState('')
+  const [commonAllergies, setCommonAllergies] = useState([])
+
+  const commonAllergensList = [
+    'Peanuts', 'Tree Nuts', 'Milk', 'Eggs', 'Wheat', 'Soy', 
+    'Fish', 'Shellfish', 'Sesame', 'Gluten'
+  ]
 
   const handleDrag = (e) => {
     e.preventDefault()
@@ -52,8 +59,20 @@ function ImageUpload({ onImageUpload, loading }) {
 
   const handleAnalyze = () => {
     if (selectedFile) {
-      onImageUpload(selectedFile, dishName)
+      const allergyList = [...commonAllergies]
+      if (allergies.trim()) {
+        allergyList.push(...allergies.split(',').map(a => a.trim()).filter(a => a))
+      }
+      onImageUpload(selectedFile, dishName, allergyList)
     }
+  }
+
+  const toggleCommonAllergy = (allergen) => {
+    setCommonAllergies(prev => 
+      prev.includes(allergen) 
+        ? prev.filter(a => a !== allergen)
+        : [...prev, allergen]
+    )
   }
 
   const handleButtonClick = () => {
@@ -77,6 +96,33 @@ function ImageUpload({ onImageUpload, loading }) {
             disabled={loading}
           />
           <span className="input-hint">Help AI identify your food more accurately</span>
+        </div>
+
+        <div className="form-group">
+          <label>Allergies & Dietary Restrictions (Optional)</label>
+          <div className="allergies-selector">
+            {commonAllergensList.map(allergen => (
+              <button
+                key={allergen}
+                type="button"
+                className={`allergy-tag ${commonAllergies.includes(allergen) ? 'selected' : ''}`}
+                onClick={() => toggleCommonAllergy(allergen)}
+                disabled={loading}
+              >
+                {allergen}
+              </button>
+            ))}
+          </div>
+          <input
+            type="text"
+            placeholder="Other allergies (comma-separated)"
+            value={allergies}
+            onChange={(e) => setAllergies(e.target.value)}
+            className="dish-input"
+            disabled={loading}
+            style={{ marginTop: '10px' }}
+          />
+          <span className="input-hint">We'll check for allergens and warn you</span>
         </div>
 
         <div
